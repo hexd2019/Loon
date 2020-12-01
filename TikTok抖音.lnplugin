@@ -1,5 +1,13 @@
 # TikTok解锁+抖音去广告&去水印
 
+[Rule]
+
+DOMAIN-SUFFIX, amemv.com, DIRECT
+DOMAIN-SUFFIX, byteimg.com, DIRECT
+DOMAIN-SUFFIX, dig.bdurl.net, DIRECT
+DOMAIN-SUFFIX, ibytedtos.com, REJECT
+DOMAIN-SUFFIX, ipstatp.com, REJECT
+
 [URL Rewrite]
 
 #TikTok
@@ -20,12 +28,13 @@
 ^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/search\/item\/ https://aweme.snssdk.com/aweme/v1/search/item/ header
 ^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/general\/search\/single\/ https://aweme.snssdk.com/aweme/v1/general/search/single/ header
 ^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/hot/search\/video\/list\/ https://aweme.snssdk.com/aweme/v1/hot/search/video/list/ header
+
 ^https?://api\d?.tiktokv.com/api/ad/ - reject
 ^https?://api\d?.musical.ly/api/ad/ - reject
 
 [Script]
 
-http-response ^https?:\/\/aweme\.snssdk\.com\/aweme\/v1\/(feed|aweme\/post|follow\/feed|nearby\/feed|search\/item|general\/search\/single|hot\/search\/video\/list)\/ requires-body=1,max-size=-1,script-path=https://Choler.github.io/Surge/Script/douyin.js
+http-response ^https?:\/\/aweme\.snssdk\.com\/aweme\/v1\/(feed|aweme\/post|follow\/feed|nearby\/feed|search\/item|general\/search\/single|hot\/search\/video\/list)\/ requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Choler/Surge/master/Script/douyin.js,tag=抖音
 
 [MITM]
 hostname = %INSERT% *.tiktokv.com, *.byteoversea.com, *.musical.ly, *.snssdk.com, %APPEND% *.amemv.com, 

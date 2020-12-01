@@ -1,0 +1,31 @@
+# TikTok解锁+抖音去广告&去水印
+
+[URL Rewrite]
+
+#TikTok
+(?<=_region=)CN(?=&) JP 307
+(?<=(carrier|account|sys)_region=)CN JP 307
+(?<=&app_version=)1[6-9]..(?=.?.?&) 100. 307
+(?<=\?version_code=)1[6-9]..(?=.?.?&) 100. 307
+
+(?<=&mcc_mnc=)460 262 307
+
+# > TikTok&抖音 去广告&水印
+^https://api[\w-]*?.tiktokv.com/aweme/v\d/policy/notice/? - reject
+^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/feed\/ https://aweme.snssdk.com/aweme/v1/feed/ header
+^https?:\/\/(.*)\.amemv\.com\/aweme\/v2\/(follow\/)?feed\/ https://$1.amemv.com/aweme/v1/$2feed/ header
+^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/aweme\/post\/ https://aweme.snssdk.com/aweme/v1/aweme/post/ header
+^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/follow\/feed\/ https://aweme.snssdk.com/aweme/v1/follow/feed/ header
+^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/nearby\/feed\/ https://aweme.snssdk.com/aweme/v1/nearby/feed/ header
+^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/search\/item\/ https://aweme.snssdk.com/aweme/v1/search/item/ header
+^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/general\/search\/single\/ https://aweme.snssdk.com/aweme/v1/general/search/single/ header
+^https?:\/\/.+?\.amemv\.com\/aweme\/v\d\/hot/search\/video\/list\/ https://aweme.snssdk.com/aweme/v1/hot/search/video/list/ header
+^https?://api\d?.tiktokv.com/api/ad/ - reject
+^https?://api\d?.musical.ly/api/ad/ - reject
+
+[Script]
+
+http-response ^https?:\/\/aweme\.snssdk\.com\/aweme\/v1\/(feed|aweme\/post|follow\/feed|nearby\/feed|search\/item|general\/search\/single|hot\/search\/video\/list)\/ requires-body=1,max-size=-1,script-path=https://Choler.github.io/Surge/Script/douyin.js
+
+[MITM]
+hostname = %INSERT% *.tiktokv.com, *.byteoversea.com, *.musical.ly, *.snssdk.com, %APPEND% *.amemv.com, 

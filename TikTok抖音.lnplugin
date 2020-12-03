@@ -1,6 +1,9 @@
 # TikTok解锁+抖音去广告&去水印
 
 [Rule]
+DOMAIN,api-h2.tiktokv.com,PROXY
+DOMAIN,api2-16-h2.musical.ly,PROXY
+DOMAIN,api2-19-h2.musical.ly,PROXY
 
 DOMAIN-SUFFIX, amemv.com, DIRECT
 DOMAIN-SUFFIX, byteimg.com, DIRECT
@@ -15,7 +18,6 @@ DOMAIN-SUFFIX, ipstatp.com, REJECT
 (?<=(carrier|account|sys)_region=)CN JP 307
 (?<=&app_version=)1[6-9]..(?=.?.?&) 100. 307
 (?<=\?version_code=)1[6-9]..(?=.?.?&) 100. 307
-
 (?<=&mcc_mnc=)460 262 307
 
 # > TikTok&抖音 去广告&水印
